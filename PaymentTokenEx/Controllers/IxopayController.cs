@@ -25,7 +25,7 @@ public class IxopayController : ControllerBase
     }
 
     [HttpPost("threeDSMethodNotificationUrl")]
-    public async Task<IActionResult> threeDSMethodNotificationUrlPostAsync(string? threeDSMethodNotificationUrl)
+    public async Task<IActionResult> threeDSMethodNotificationUrlPostAsync(string? cres)
     {
         using (var reader = new StreamReader(Request.Body))
         {
@@ -44,7 +44,7 @@ public class IxopayController : ControllerBase
       // Envia uma mensagem para o parent window
       window.parent.postMessage(""challenge-complete"", ""*"");
     </script>
-    <p>Authentication completed. You may close this window.{threeDSMethodNotificationUrl}</p>
+    <p>Authentication completed. You may close this window.{cres}</p>
   </body>
 </html>";
 
