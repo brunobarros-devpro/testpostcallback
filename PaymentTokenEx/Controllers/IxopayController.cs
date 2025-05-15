@@ -30,8 +30,25 @@ public class IxopayController : ControllerBase
         using (var reader = new StreamReader(Request.Body))
         {
             var body = await reader.ReadToEndAsync();
-            // Aqui você pode processar o corpo da requisição.
-            return Ok(body);
+            // Você pode processar o 'body' se necessário.
+
+            var html = $@"
+<!DOCTYPE html>
+<html lang=""en"">
+  <head>
+    <meta charset=""UTF-8"" />
+    <title>3DS Complete</title>
+  </head>
+  <body>
+    <script>
+      // Envia uma mensagem para o parent window
+      window.parent.postMessage(""challenge-complete"", ""*"");
+    </script>
+    <p>Authentication completed. You may close this window.{threeDSMethodNotificationUrl}</p>
+  </body>
+</html>";
+
+            return Content(html, "text/html");
         }
     }
 }
