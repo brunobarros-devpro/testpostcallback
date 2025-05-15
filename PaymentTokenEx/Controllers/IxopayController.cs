@@ -25,7 +25,10 @@ public class IxopayController : ControllerBase
     }
 
     [HttpPost("threeDSMethodNotificationUrl")]
-    public async Task<IActionResult> threeDSMethodNotificationUrlPostAsync(string? cres)
+    public async Task<IActionResult> threeDSMethodNotificationUrlPostAsync(
+        [FromRoute] string notification,
+        [FromForm] string cres,
+        [FromForm] string threeDSSessionData)
     {
         using (var reader = new StreamReader(Request.Body))
         {
