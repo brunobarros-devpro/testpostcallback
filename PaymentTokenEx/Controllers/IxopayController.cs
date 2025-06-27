@@ -33,7 +33,6 @@ public class IxopayController : ControllerBase
         using (var reader = new StreamReader(Request.Body))
         {
             var body = await reader.ReadToEndAsync();
-            // Você pode processar o 'body' se necessário.
 
             var html = $@"
 <!DOCTYPE html>
@@ -44,10 +43,12 @@ public class IxopayController : ControllerBase
   </head>
   <body>
     <script>
-      // Envia uma mensagem para o parent window
       window.parent.postMessage(""challenge-complete"", ""*"");
     </script>
-    <p>Authentication completed. You may close this window.{cres}</p>
+    <p>Authentication completed. You may close this window.</p>
+<p>{cres}</p>
+<p>{notification}</p>
+<p>{threeDSSessionData}</p>
   </body>
 </html>";
 
